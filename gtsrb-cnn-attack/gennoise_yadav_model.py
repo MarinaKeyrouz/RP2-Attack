@@ -61,7 +61,7 @@ def main(argv=None):
         latest_loss = 10000
 
         for i in xrange(FLAGS.attack_epochs):
-            print ('Epoch %d'(%i)),
+            print 'Epoch %d'%(i)),
             sys.stdout.flush()
             _,  train_loss, mod_loss, noisy_in, noisy_classes = sess.run( \
                 (op, \
