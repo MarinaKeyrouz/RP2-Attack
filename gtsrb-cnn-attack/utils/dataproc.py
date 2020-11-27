@@ -185,7 +185,7 @@ def process_orig_data(rootpath, savedir):
             # get the subdirectory for the current class
             prefix = os.path.join(rootpath,format(classnum, '05d')) 
 
-            print ('now in folder %s'(%prefix))
+            print ('now in folder %s'%(prefix))
 
             # open the annotations file
             with open(os.path.join(prefix, 'GT-'+ format(classnum, '05d') + '.csv')) as annotfile:
