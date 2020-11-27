@@ -185,7 +185,7 @@ def process_orig_data(rootpath, savedir):
             # get the subdirectory for the current class
             prefix = os.path.join(rootpath,format(classnum, '05d')) 
 
-            print 'now in folder %s'%prefix
+            print ('now in folder %s'(%prefix))
 
             # open the annotations file
             with open(os.path.join(prefix, 'GT-'+ format(classnum, '05d') + '.csv')) as annotfile:
@@ -205,7 +205,7 @@ def process_orig_data(rootpath, savedir):
                     orig_fpath = os.path.join(prefix,row[0])
                     write_img(os.path.join(savedir, new_fname), read_and_crop_image(orig_fpath, int(row[3]), int(row[5]), int(row[4]), int(row[6])))
 
-    print 'Done.'
+    print ('Done.')
 
 def process_orig_test_data(rootpath, savedir, csvfile='GT-final_test.csv'):
     '''
@@ -236,4 +236,4 @@ def process_orig_test_data(rootpath, savedir, csvfile='GT-final_test.csv'):
                 write_img(os.path.join(savedir, new_fname), 
                           read_and_crop_image(orig_fpath, int(row[3]), int(row[5]), int(row[4]), int(row[6])))
 
-    print 'Done.'
+    print ('Done.')
