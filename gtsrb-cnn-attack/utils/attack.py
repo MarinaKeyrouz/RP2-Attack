@@ -183,7 +183,8 @@ def setup_attack_graph():
         elif FLAGS.resize_method == "convresize":
             assert FLAGS.img_rows == 32 and FLAGS.input_rows == 256, \
                     "Convresize only guaranteed to work with input 256 and a 32 model"
-            f = [[[[1,0,0], [0,1,0], [0,0,1]] for _ in xrange(8)] for __ in xrange(8)]
+            
+            f = [[[[1,0,0], [0,1,0], [0,0,1]] for _ in range(8)] for __ in range(8)]
             f = np.array(f).astype('float32')/(64.0)
             varops['noisy_inputs'] = tf.nn.conv2d(varops['noisy_inputs'], \
                                                  tf.constant(f), \
