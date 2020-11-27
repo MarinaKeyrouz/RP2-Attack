@@ -30,9 +30,9 @@ flags.DEFINE_boolean('save_all_noisy_images', False,
 
 def main(argv=None):
     with tf.device(FLAGS.device):
-        print "Parameters"
+        print ("Parameters")
         for k in sorted(FLAGS.__dict__["__flags"].keys()):
-            print k, FLAGS.__dict__["__flags"][k]
+            print (k, FLAGS.__dict__["__flags"][k])
 
         op, model_obj, sess, pholders, varops = setup_attack_graph()
 
@@ -61,7 +61,7 @@ def main(argv=None):
         latest_loss = 10000
 
         for i in xrange(FLAGS.attack_epochs):
-            print 'Epoch %d'%i,
+            print ('Epoch %d'(%i)),
             sys.stdout.flush()
             _,  train_loss, mod_loss, noisy_in, noisy_classes = sess.run( \
                 (op, \
@@ -83,11 +83,11 @@ def main(argv=None):
                      model_obj.keep_prob: 1.0
                 })
 
-            print "adversarial loss %.5f reg loss %.5f model loss %.5f model loss on clean img: %.5f"%(train_loss, reg_loss, mod_loss, clean_loss),
+            print ("adversarial loss %.5f reg loss %.5f model loss %.5f model loss on clean img: %.5f"%(train_loss, reg_loss, mod_loss, clean_loss)),
             sys.stdout.flush()
 
             if FLAGS.printability_optimization:
-                print "noise NPS %.5f"%sess.run(varops['printer_error'], feed_dict=feed_dict),
+                print ("noise NPS %.5f"%(sess.run(varops['printer_error'], feed_dict=feed_dict))),
 
             num_misclassified = 0
 
@@ -98,7 +98,7 @@ def main(argv=None):
                     num_misclassified += 1
 
             proportion_misclassified = float(num_misclassified)/float(num_images)
-            print 'percent misclassified images %.1f'%(proportion_misclassified*100.0)
+            print ('percent misclassified images %.1f'%(proportion_misclassified*100.0))
 
             if proportion_misclassified > latest_misrate or \
                     (proportion_misclassified == latest_misrate and train_loss < latest_loss) \
