@@ -183,8 +183,7 @@ def setup_attack_graph():
         elif FLAGS.resize_method == "convresize":
             assert FLAGS.img_rows == 32 and FLAGS.input_rows == 256, \
                     "Convresize only guaranteed to work with input 256 and a 32 model"
-            
-            f = [[[[1,0,0], [0,1,0], [0,0,1]] for _ in range(8)] for __ in range(8)]
+            f = [[[[1,0,0], [0,1,0], [0,0,1]] for _ in xrange(8)] for __ in xrange(8)]
             f = np.array(f).astype('float32')/(64.0)
             varops['noisy_inputs'] = tf.nn.conv2d(varops['noisy_inputs'], \
                                                  tf.constant(f), \
@@ -205,11 +204,11 @@ def setup_attack_graph():
 
     model_vars = filter(lambda x: not str(x.name).startswith("noiseattack"), \
                         tf.global_variables())
-    print (map(lambda x: x.name, model_vars))
+    print map(lambda x: x.name, model_vars)
     # load the model
     saver = tf.train.Saver(var_list=model_vars)
     saver.restore(sess, FLAGS.model_path)
-    print ('Loaded the parameters for the model from', FLAGS.model_path)
+    print 'Loaded the parameters for the model from', FLAGS.model_path
 
     # adv_pred is the output of the model for an image (or images) with noise
     varops['adv_pred'] = model.labels_pred
@@ -267,7 +266,7 @@ def setup_attack_graph():
 
     
     sess.run(tf.variables_initializer(set(tf.global_variables()) - set(model_vars)))
-    print ('Initialized the model variables')
+    print 'Initialized the model variables'
 
     return optimization_op, model, sess, placeholders, varops
 

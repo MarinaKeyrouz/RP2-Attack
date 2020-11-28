@@ -24,21 +24,21 @@ def main(argv=None):
                           map(lambda x: cv2.resize(read_img(os.path.join(FLAGS.srcimgs, x)), (FLAGS.img_cols, FLAGS.img_rows)),
                               imgnames))
                       , dtype=np.float32)
-    print ('Loaded images from %s'%(FLAGS.srcimgs))
+    print 'Loaded images from %s'%FLAGS.srcimgs
     sys.stdout.flush()
     results = []
     with tf.Session() as sess:
         model = YadavModel(train=False)
         saver = tf.train.Saver()
         saver.restore(sess, FLAGS.weights)
-        print ('Loaded model from %s'%(FLAGS.weights))
+        print 'Loaded model from %s'%FLAGS.weights
         sys.stdout.flush()
         output = sess.run(model.labels_pred, feed_dict={model.features: imgs, model.keep_prob: 1.0}) 
         for i in range(len(imgs)):
             results.append((imgnames[i], top3_as_string(output, i)))
 
     for i in range(len(results)):
-        print (results[i][0], results[i][1])
+        print results[i][0], results[i][1]
 
 if __name__ == "__main__":
     app.run()
