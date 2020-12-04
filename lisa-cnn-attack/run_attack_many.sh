@@ -1,12 +1,6 @@
 #!/bin/bash
-export SIGN_PREFIX="octagon"
-export SIGN_SETPOINT=0.37
-export SIGN_MASK="octagon.png"
-export SIGN_TARGET=12
 
-mkdir optimization_output/${SIGN_PREFIX}
-mkdir optimization_output/${SIGN_PREFIX}/noisy_images
-mkdir optimization_output/${SIGN_PREFIX}/model
+
 
 python gennoise_many_images.py  \
     --tf_seed 12345 \
@@ -21,15 +15,15 @@ python gennoise_many_images.py  \
     --attack_epochs 300 \
     --save_frequency 10 \
     --attack_srcdir="victim-set" \
-    --attack_mask="./masks/${SIGN_MASK}" \
-    --checkpoint ${SIGN_PREFIX}\
-    --target_class ${SIGN_TARGET} \
-    --inverse_mask_setpoint ${SIGN_SETPOINT} \
+    --attack_mask="./masks/octagon.png" \
+    --checkpoint octagon\
+    --target_class 12 \
+    --inverse_mask_setpoint 0.37 \
     --printability_optimization False \
     --printability_tuples="npstriplets.txt" \
     --clipping True \
     --noise_clip_max 20.0 \
     --noise_clip_min -20.0 \
     --noisy_input_clip_max 1.0 \
-    --noisy_input_clip_min 0.0 | tee ./optimization_output/${SIGN_PREFIX}/optimization_printout_${SIGN_PREFIX}.txt
+    --noisy_input_clip_min 0.0 | tee ./optimization_output/octagon/optimization_printout_octagon.txt
 

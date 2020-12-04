@@ -115,10 +115,10 @@ def report_extreme_values(arr, min_val=0.0, max_val=1.0, name="array"):
     :param max_val: the upper bound of the range
     '''
     arr_flat = arr.flatten()
-    print ('avg %s value'%name), np.average(arr_flat)
-    print ('%.3f percent of all values in %s are outside (%d,%d)'%((float(len(filter(lambda x: x>max_val or x<min_val, arr_flat)))/float(len(arr_flat)))*100.0, name, min_val, max_val))
-    print ('%.3f percent of all values in %s are bigger than %d'%((float(len(filter(lambda x: x>max_val, arr_flat)))/float(len(arr_flat)))*100.0, name, max_val))
-    print ('%.3f percent of all values in %s are less than %d'%((float(len(filter(lambda x: x<min_val, arr_flat)))/float(len(arr_flat)))*100.0, name, min_val))
+    print 'avg %s value'%name, np.average(arr_flat)
+    print '%.3f percent of all values in %s are outside (%d,%d)'%((float(len(filter(lambda x: x>max_val or x<min_val, arr_flat)))/float(len(arr_flat)))*100.0, name, min_val, max_val)
+    print '%.3f percent of all values in %s are bigger than %d'%((float(len(filter(lambda x: x>max_val, arr_flat)))/float(len(arr_flat)))*100.0, name, max_val)
+    print '%.3f percent of all values in %s are less than %d'%((float(len(filter(lambda x: x<min_val, arr_flat)))/float(len(arr_flat)))*100.0, name, min_val)
 
 def load_angles_inverse_mask(folder, dist="1a", angles=['A', 'B', 'C', 'D']):
     '''
@@ -151,7 +151,7 @@ def load_many_images(src):
             imgs.append(load_img_inverse_mask(os.path.join(src, fname)))
         else:
             imgs.append(load_norm_img_from_source(os.path.join(src, fname)))
-    print ('Loaded images in directory %s'%src)
+    print 'Loaded images in directory %s'%src
     map(lambda x: sys.stdout.write('Index %d image %s\n'%(x[0],x[1])), zip(range(len(filenames)), filenames))
     print 
     sys.stdout.flush()
@@ -169,7 +169,7 @@ def load_many_images_twomask(src):
     filenames = os.listdir(src)
     for fname in filenames:
         imgs.append(load_img_inverse_mask_twomask(os.path.join(src, fname)))
-    print ('Loaded images in directory %s'%src)
+    print 'Loaded images in directory %s'%src
     map(lambda x: sys.stdout.write('Index %d image %s\n'%(x[0],x[1])), zip(range(len(filenames)), filenames))
     print 
     sys.stdout.flush()
